@@ -48,7 +48,7 @@ module "organization_policies_type_boolean" {
   source   = "terraform-google-modules/org-policy/google"
   version  = "~> 5.1"
   for_each = local.boolean_type_organization_policies
-
+  count = 0
   organization_id = local.organization_id
   folder_id       = local.folder_id
   policy_for      = local.policy_for
@@ -65,7 +65,7 @@ module "organization_policies_type_boolean" {
 module "org_vm_external_ip_access" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-
+  count = 0
   folder_id       = local.folder_id
   policy_for      = "folder"
   policy_type     = "list"
@@ -76,7 +76,7 @@ module "org_vm_external_ip_access" {
 module "org_policies_restrict_protocol_fowarding" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-  count   = var.enforce_restrict_protocol_fowarding_constraint ? 1 : 0 # Conditional creation
+  count   = 0 # Conditional creation
 
   constraint        = "constraints/compute.restrictProtocolForwardingCreationForTypes"
   policy_for        = "folder"
@@ -95,7 +95,7 @@ module "org_policies_restrict_protocol_fowarding" {
 module "org_policies_require_trusted_images" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-  count   = var.enforce_trusted_image_projects_constraint ? 1 : 0 # Conditional creation
+  count   = 0 # Conditional creation
 
   policy_for        = "folder" # Should be "organization" or "folder"
   folder_id         = local.folder_id
@@ -111,7 +111,7 @@ module "org_policies_require_trusted_images" {
 module "org_policies_restricted_loadbalancer_types" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-  count   = var.enforce_allowed_lb_types_constraint ? 1 : 0 # Conditional creation
+  count   = 0 # Conditional creation
 
   folder_id         = local.folder_id  # Replace with your folder ID (if applicable)
   policy_for        = local.policy_for # Set to "organization" or "folder"
@@ -128,7 +128,7 @@ module "org_policies_restricted_loadbalancer_types" {
 module "org_policies_disable_guest_attribute_access" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-  count   = var.enforce_disable_guest_attribute_access_constraint ? 1 : 0 # Conditional creation
+  count   = 0 # Conditional creation
 
   policy_for  = local.policy_for # Set to "organization" or "folder"
   folder_id   = local.folder_id  # Replace with your folder ID (if applicable)
@@ -168,6 +168,7 @@ module "org_domain_restricted_sharing" {
 
 module "domain_restricted_contacts" {
   source  = "terraform-google-modules/org-policy/google"
+  count = 0
   version = "~> 5.1"
   folder_id         = local.folder_id
   policy_for        = "folder"
@@ -184,7 +185,7 @@ module "domain_restricted_contacts" {
 module "allowed_worker_pools" {
   source  = "terraform-google-modules/org-policy/google"
   version = "~> 5.1"
-  count   = var.enforce_allowed_worker_pools && local.cloud_build_private_worker_pool_id != "" ? 1 : 0
+  count   = 0
 
   organization_id   = local.organization_id
   folder_id         = local.folder_id
@@ -212,7 +213,7 @@ resource "google_access_context_manager_access_policy" "access_policy" {
 module "org_policies_resource_location_constraint" {
   source  = "terraform-google-modules/org-policy/google"
   version = ">= 3.77"                                        #"~> 3.0.2"
-  count   = var.enforce_resource_location_constraint ? 1 : 0 # Conditional creation
+  count   = 0 # Conditional creation
 
   constraint        = "constraints/gcp.resourceLocations"
   folder_id         = local.folder_id
