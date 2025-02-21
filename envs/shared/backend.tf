@@ -16,7 +16,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "UPDATE_ME"
+    bucket = var.remote_state_bucket
     prefix = "terraform/org/state"
   }
 }
