@@ -38,7 +38,7 @@ locals {
 }
 
 resource "google_essential_contacts_contact" "essential_contacts" {
-  for_each                            = local.contacts_list
+  count = 0
   parent                              = local.parent
   email                               = each.key
   language_tag                        = var.essential_contacts_language
