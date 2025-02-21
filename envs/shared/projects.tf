@@ -22,9 +22,9 @@ locals {
     "roles/iam.serviceAccountUser",
   ]
   environments = merge ({
-    "development" : "d",
-    "nonproduction" : "n",
-    "production" : "p"
+    "development" : "dev",
+    "nonproduction" : "np",
+    "production" : "prod"
   },
     try(local.management_enabled,false) ? { "management" : "m" } : {},
     try(local.identity_enabled, false)  ? { "identity" : "i" } : {}
