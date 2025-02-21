@@ -200,7 +200,7 @@ module "allowed_worker_pools" {
 # *******************************************/
 
 resource "google_access_context_manager_access_policy" "access_policy" {
-  count  = var.create_access_context_manager_access_policy ? 1 : 0
+  count  = 0
   parent = "organizations/${local.org_id}"
   title  = "default policy"
 }
