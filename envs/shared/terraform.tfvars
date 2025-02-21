@@ -15,13 +15,13 @@
  */
 
 # Must include the domain of the organization you are deploying the foundation.
-domains_to_allow = ["DOMAIN"]
+domains_to_allow = ["kubeshot.com"]
 
-essential_contacts_domains_to_allow = ["@DOMAIN"]
+essential_contacts_domains_to_allow = ["@kubeshot.com"]
 
 scc_notification_name = "scc-notify"
 
-remote_state_bucket = "REMOTE_STATE_BUCKET"
+remote_state_bucket = "bkt-prj-b-seed-tfstate-8650"
 
 //scc_notification_filter = "state=\\\"ACTIVE\\\""
 
