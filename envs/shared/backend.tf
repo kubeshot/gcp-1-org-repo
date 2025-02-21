@@ -16,7 +16,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = var.remote_state_bucket
+    bucket = "bkt-prj-b-seed-tfstate-8650"
     prefix = "terraform/org/state"
   }
 }
