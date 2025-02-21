@@ -67,11 +67,13 @@ jobs:
         run: |
           echo "terraform init"
           ${GITHUB_WORKSPACE}/tf-wrapper.sh init "${GITHUB_REF_NAME}"
-      - id: import prj
+      
+      - id: importPrj
         run: |
-          cd ../../envs/shared
+          echo "import prj"
+          cd ${GITHUB_WORKSPACE}/envs/shared
+          terraform init
           terraform import google_project.main projects/prj-c-scc-mdzj
-          cd ../../.github/workflows
 
       - id: plan
         run: |
