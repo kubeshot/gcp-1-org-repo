@@ -204,7 +204,7 @@ module "scc_notifications" {
   random_project_id        = true
   random_project_id_length = 4
   default_service_account  = "keep"
-  name                     = "${local.project_prefix}-c-scc"
+  name                     = "${local.project_prefix}-c-sccn"
   org_id                   = local.org_id
   billing_account          = local.billing_account
   folder_id                = google_folder.common.id
