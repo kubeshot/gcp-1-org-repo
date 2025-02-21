@@ -40,7 +40,7 @@ data "terraform_remote_state" "bootstrap" {
   backend = "gcs"
 
   config = {
-    bucket = var.remote_state_bucket
+    bucket = "bkt-prj-b-seed-tfstate-8650"
     prefix = "terraform/bootstrap/state"
   }
 }

@@ -151,7 +151,7 @@ resource "time_sleep" "wait_logs_export" {
 module "org_domain_restricted_sharing" {
   source  = "terraform-google-modules/org-policy/google//modules/domain_restricted_sharing"
   version = "~> 5.1"
-
+  count = 0
   organization_id  = local.organization_id
   folder_id        = local.folder_id
   policy_for       = local.policy_for
@@ -200,7 +200,7 @@ module "allowed_worker_pools" {
 # *******************************************/
 
 resource "google_access_context_manager_access_policy" "access_policy" {
-  count  = var.create_access_context_manager_access_policy ? 1 : 0
+  count  = 0
   parent = "organizations/${local.org_id}"
   title  = "default policy"
 }
