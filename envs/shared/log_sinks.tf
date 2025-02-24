@@ -51,7 +51,7 @@ module "logs_export" {
   *****************************************/
   storage_options = {
     logging_sink_filter          = local.logs_filter
-    logging_sink_name            = "sk-c-logging-bkt"
+    logging_sink_name            = "sk-c-logging-bkt0"
     storage_bucket_name          = "bkt-${module.org_audit_logs.project_id}-org-logs-${random_string.suffix.result}"
     location                     = var.log_export_storage_location
     retention_policy_enabled     = var.log_export_storage_retention_policy != null
@@ -66,7 +66,7 @@ module "logs_export" {
   *****************************************/
   pubsub_options = {
     logging_sink_filter = local.logs_filter
-    logging_sink_name   = "sk-c-logging-pub"
+    logging_sink_name   = "sk-c-logging-pub0"
     topic_name          = "tp-org-logs-${random_string.suffix.result}"
     create_subscriber   = true
   }

@@ -11,7 +11,8 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
+ 
  */
 
 locals {
@@ -22,9 +23,9 @@ locals {
     "roles/iam.serviceAccountUser",
   ]
   environments = merge ({
-    "development" : "d",
-    "nonproduction" : "n",
-    "production" : "p"
+    "development" : "dev",
+    "nonproduction" : "np",
+    "production" : "prod"
   },
     try(local.management_enabled,false) ? { "management" : "m" } : {},
     try(local.identity_enabled, false)  ? { "identity" : "i" } : {}
