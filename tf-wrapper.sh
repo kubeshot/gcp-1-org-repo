@@ -230,6 +230,21 @@ tf_show() {
   fi
 }
 
+tf_destroy() {
+  local path=$1
+  local tf_env="${path#"$base_dir"/}"
+  echo "*************** TERRAFORM DESTROY *******************"
+  echo "      At environment: ${tf_env} "
+  echo "*****************************************************"
+  if [ -d "$path" ]; then
+    cd "$path" || exit
+    terraform destroy -no-color -input=false -auto-approve || exit 1
+    cd "$base_dir" || exit
+  else
+    echo "ERROR: ${path} does not exist"
+  fi
+}
+
 ## terraform validate for single environment.
 tf_validate() {
   local path=$1
@@ -316,6 +331,11 @@ single_action_runner() {
           validate )
             tf_validate "$env_path" "$policy_source"
             ;;
+
+          destroy )
+            tf_destroy "$env_path"
+            ;;
+
           * )
             echo "unknown option: ${action}"
             ;;
