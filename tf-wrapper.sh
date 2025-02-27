@@ -184,6 +184,7 @@ tf_plan() {
   fi
   if [ -d "$path" ]; then
     cd "$path" || exit
+    terraform state rm module.logs_export.module.destination_storage[0].google_storage_bucket.bucket
     terraform plan -no-color -input=false -out "${tmp_plan}/${tf_file}.tfplan" || exit 21
     cd "$base_dir" || exit
   else
