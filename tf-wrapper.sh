@@ -184,6 +184,8 @@ tf_plan() {
   fi
   if [ -d "$path" ]; then
     cd "$path" || exit
+     echo "Removing KMS key from Terraform state..."
+    terraform state rm module.kms.google_kms_crypto_key.key || echo "KMS key not found in state, continuing..."
     terraform plan -no-color -input=false -out "${tmp_plan}/${tf_file}.tfplan" || exit 21
     cd "$base_dir" || exit
   else
