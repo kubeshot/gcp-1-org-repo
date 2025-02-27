@@ -57,7 +57,7 @@ module "logs_export" {
     retention_policy_enabled     = var.log_export_storage_retention_policy != null
     retention_policy_is_locked   = var.log_export_storage_retention_policy == null ? null : var.log_export_storage_retention_policy.is_locked
     retention_policy_period_days = var.log_export_storage_retention_policy == null ? null : var.log_export_storage_retention_policy.retention_period_days
-    force_destroy                = var.log_export_storage_force_destroy
+    force_destroy                = true
     versioning                   = var.log_export_storage_versioning
   }
 
