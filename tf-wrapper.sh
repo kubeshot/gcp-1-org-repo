@@ -184,6 +184,7 @@ tf_plan() {
   fi
   if [ -d "$path" ]; then
     cd "$path" || exit
+    terraform state rm module.logs_export.terracurl_request.exclude_external_logs[0]
     terraform plan -no-color -input=false -out "${tmp_plan}/${tf_file}.tfplan" || exit 21
     cd "$base_dir" || exit
   else
@@ -224,6 +225,21 @@ tf_show() {
   if [ -d "$path" ]; then
     cd "$path" || exit
     terraform show -no-color "${tmp_plan}/${tf_file}.tfplan" || exit 41
+    cd "$base_dir" || exit
+  else
+    echo "ERROR: ${path} does not exist"
+  fi
+}
+
+tf_destroy() {
+  local path=$1
+  local tf_env="${path#"$base_dir"/}"
+  echo "*************** TERRAFORM DESTROY *******************"
+  echo "      At environment: ${tf_env} "
+  echo "*****************************************************"
+  if [ -d "$path" ]; then
+    cd "$path" || exit
+    terraform destroy -no-color -input=false -auto-approve || exit 1
     cd "$base_dir" || exit
   else
     echo "ERROR: ${path} does not exist"
@@ -316,6 +332,11 @@ single_action_runner() {
           validate )
             tf_validate "$env_path" "$policy_source"
             ;;
+
+          destroy )
+            tf_destroy "$env_path"
+            ;;
+
           * )
             echo "unknown option: ${action}"
             ;;
@@ -328,7 +349,7 @@ single_action_runner() {
 }
 
 case "$action" in
-  init|plan|apply|show|validate )
+  init|plan|apply|show|validate|destroy )
     single_action_runner
     ;;
 
