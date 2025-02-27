@@ -348,7 +348,7 @@ single_action_runner() {
 }
 
 case "$action" in
-  init|plan|apply|show|validate )
+  init|plan|apply|show|validate|destroy )
     single_action_runner
     ;;
 
