@@ -78,12 +78,7 @@ jobs:
           echo "validate"
           ${GITHUB_WORKSPACE}/tf-wrapper.sh validate "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/policy-library" "${PROJECT_ID}" "FILESYSTEM" "GITHUB"
           
-      - id: apply
+      - id: destroy
         run: |
-          echo "terraform apply"
-          ${GITHUB_WORKSPACE}/tf-wrapper.sh apply "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/policy-library" "${PROJECT_ID}" "FILESYSTEM" "GITHUB"
-
-      # - id: destroy
-      #   run: |
-      #     echo "terraform destroy"
-      #     ${GITHUB_WORKSPACE}/tf-wrapper.sh destroy "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/policy-library" "${PROJECT_ID}" "FILESYSTEM" "GITHUB"
+          echo "terraform destroy"
+          ${GITHUB_WORKSPACE}/tf-wrapper.sh destroy "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/policy-library" "${PROJECT_ID}" "FILESYSTEM" "GITHUB"
